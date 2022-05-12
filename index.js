@@ -9,8 +9,7 @@ window.onload = function(){
 
     //Camera
     let camera = new THREE.PerspectiveCamera(30, w/h, 0.1, 1000);
-    camera.position.z = 60
-    camera.position.y = 2
+    camera.position.z = 51
     
     //Renderer
     let renderer = new THREE.WebGLRenderer(antialias=false);
@@ -52,19 +51,22 @@ window.onload = function(){
     //Controls
     let controls = new THREE.OrbitControls(camera,renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.241;
-    controls.rotateSpeed = 0.005;
+    controls.dampingFactor = 0.041;
+    controls.rotateSpeed = 0.001;
     scene.add(controls);
-    
+    //controls.enabled = false;
     //RENDER
 
     let animation = function(){
         sun.rotation.y += 0.001;
+        earth.rotation.y +=0.025;
         controls.update();
     }
 
     let render_scene = function(){
         renderer.render(scene,camera);
+        animation();    
+        console.log(camera.position);
         requestAnimationFrame(render_scene);
     }
     render_scene();
